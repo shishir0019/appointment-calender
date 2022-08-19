@@ -74,6 +74,8 @@ let state = localStorage.state ? JSON.parse(localStorage.state) : {
     appointmentList: []
 }
 
+const selectedAppoinment = null
+
 const save = () => {
     localStorage.state = JSON.stringify(state)
     state = JSON.parse(localStorage.state) || {}
@@ -87,6 +89,53 @@ const nextMonth = () => {
 const previousMonth = () => {
     dateInstence.previousMonth();
     printMonth(dateInstence.getMonth(), dateInstence.getFullYear())
+}
+
+const previewModal = document.querySelector('#previewAppointmentDialog');
+
+const openPreviewModal = (appointment) => {
+    console.log(appointment);
+    const root = document.createElement('div');
+
+    const header = document.createElement('h3');
+    header.innerHTML = `${appointment.first_name} ${appointment.last_name}`
+
+    const body = document.createElement('div');
+    let age = document.createElement('div')
+    age.innerHTML = appointment.age
+    let date = document.createElement('div')
+    date.innerHTML = appointment.date
+    let time = document.createElement('div')
+    time.innerHTML = appointment.time
+    let email = document.createElement('a')
+    email.href = `mailto:${appointment.email}`
+    email.innerHTML = appointment.email
+    let gender = document.createElement('div')
+    gender.innerHTML = appointment.gender
+    body.append(age, date, time, email, gender)
+
+    const footer = document.createElement('div');
+    footer.innerHTML = 'footer'
+    
+    root.append(header, body, footer);
+
+    let previewConent = document.querySelector('#previewConent');
+    previewConent.innerHTML = ''
+    previewConent.append(root)
+    
+    if (typeof previewModal.showModal === "function") {
+        previewModal.showModal();
+    } else {
+        outputBox.value = "Sorry, the <dialog> API is not supported by this browser.";
+    }
+}
+
+const closePreviewDialog = () => {
+    if (typeof previewModal.showModal === "function") {
+        previewModal.close();
+    } else {
+        outputBox.value = "Sorry, the <dialog> API is not supported by this browser.";
+    }
 }
 
 const printMonth = (month, year) => {
@@ -109,13 +158,18 @@ const printMonth = (month, year) => {
         if (day.getMonth() !== dateInstence.getMonth()) dayElement.setAttribute('disabled', '');
         if (isToday) dayElement.classList.add('days__item--today')
         dayElement.innerHTML = day.getDate()
+        dayElement.style.fontSize = 'xx-large'
         days.append(dayElement);
 
         let appointments = state.appointmentList.filter(appointment => new Date(appointment.date).getTime() == day.getTime())
         let listElement = document.createElement('div');
+        // list item
         listElement.classList.add('appointments')
         for (const appointment of appointments) {
             let appointmentItem = document.createElement('div')
+            appointmentItem.addEventListener('click', () => {
+                openPreviewModal(appointment)
+            })
             appointmentItem.innerHTML = appointment.first_name
             appointmentItem.classList.add('appointments__item')
             listElement.appendChild(appointmentItem)
@@ -130,6 +184,9 @@ const createModal = document.querySelector('#createAppointmentDialog');
 
 if (typeof createModal.showModal !== 'function') {
     createModal.hidden = true;
+}
+if (typeof previewModal.showModal !== 'function') {
+    previewModal.hidden = true;
 }
 
 const openCreateDialog = () => {
@@ -151,6 +208,7 @@ const closeCreateDialog = () => {
 // createModal.addEventListener('close', (e) => {
 //     console.log('close', e);
 // });
+
 
 createModal.addEventListener('submit', (formDataEvent) => {
     let formData = new FormData(formDataEvent.target);

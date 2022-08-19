@@ -130,6 +130,22 @@ body {
 .btn--gray {}
 
 .btn--fab {}
+.btn--close {
+    font-size: x-large;
+    padding: 0;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #ff000050;
+}
+.btn--close:hover {
+    color: #ff0000;
+}
 
 .btn--fab:hover {}
 
@@ -151,6 +167,8 @@ dialog {
     padding: 30px;
     margin: auto;
     border: none;
+    width: 100%;
+    max-width: 600px;
 }
 
 dialog::backdrop {
@@ -207,6 +225,7 @@ select {
 
 .appointments__item {
     background-color: #00000050;
+    font-size: small;
     padding: 8px 5px;
 }
 

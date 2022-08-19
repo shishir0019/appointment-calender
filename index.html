@@ -49,8 +49,10 @@
     </main>
 
     <!-- preview Dialog -->
-    <dialog id="previewAppointmentDialog">
-        <div>Detail</div>
+    <dialog id="previewAppointmentDialog" class="preview-dialog">
+        <button class="btn btn--close" type="button" onclick="closePreviewDialog()">&#x2716;</button>
+        <div id="previewConent"></div>
+        <div style="font-size: 100px;">📅</div>
     </dialog>
 
     <!-- Create Dialog -->
