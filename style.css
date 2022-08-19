@@ -1,3 +1,215 @@
+:root {
+    --main-color: #00ff00;
+}
+
 body {
-    background-color: green;
+    color: #fff;
+    background-color: #222;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box
+}
+
+*:focus {
+    outline: none;
+}
+
+.t {
+    border: 1px solid red;
+}
+
+.calender {
+    display: flex;
+    flex-direction: column;
+    max-width: 1024px;
+    margin: auto;
+}
+
+.calender__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 15px; */
+}
+
+.calender__item--header {
+    padding: 10px;
+    background-color: #66666650;
+}
+
+.calender__item--body {
+    flex-direction: column;
+    background-color: #66666650;
+}
+
+.days {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 5px;
+}
+
+.days__item {
+    border: none;
+    box-shadow: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #99999980;
+    position: relative;
+}
+
+.days__item--today {
+    background-color: #00ff0010;
+    border: 1px solid #00ff00;
+}
+
+.days__item:hover {
+    background-color: #999999;
+}
+
+.days__item:disabled {
+    cursor: auto;
+    background-color: #dddddd20;
+    color: #666;
+}
+
+.week {
+    padding: 5px 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 5px;
+}
+
+.week__item {
+    font-size: large;
+    padding: 10px 5px;
+    background-color: #dddddd50;
+    width: 100%;
+}
+
+/* components */
+.btn {
+    border: none;
+    padding: 8px 15px;
+    background-color: transparent;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+.btn__item {}
+
+.btn--red {
+    background-color: #80000080;
+    color: #fff;
+}
+
+.btn--red:hover {
+    background-color: #80000099;
+    color: #fff;
+}
+
+.btn--green {
+    background-color: #00800080;
+    color: #fff;
+}
+
+.btn--green:hover {
+    background-color: #008000;
+    color: #fff;
+}
+
+.btn--gray {}
+
+.btn--fab {}
+
+.btn--fab:hover {}
+
+.from_control {
+    min-width: 200px;
+    padding: 8px 10px;
+    background-color: #dddddd50;
+    border: none;
+}
+
+header {
+    background-color: #000;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+dialog {
+    padding: 30px;
+    margin: auto;
+    border: none;
+}
+
+dialog::backdrop {
+    background-color: #000000dd;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form__input {
+    /* width: 400px; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form input:not(input[type="submit"]),
+textarea,
+select {
+    padding: 8px 15px;
+    border: 2px solid #999;
+}
+
+.form input:not(input[type="submit"]):focus,
+textarea,
+select {
+    border: 2px solid #000;
+}
+
+.form input[type="submit"],
+.form button {
+    padding: 15px;
+    width: 100%;
+}
+
+.appointments {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 2px;
+}
+.appointments::-webkit-scrollbar {
+    width: 1px;
+}
+
+.appointments__item {
+    background-color: #00000050;
+    padding: 8px 5px;
+}
+
+.appointments__item:hover {
+    background-color: #00000099;
 }
