@@ -66,6 +66,11 @@ body {
     position: relative;
 }
 
+.days__item--min {
+    height: 30px;
+    font-size: medium !important;
+}
+
 .days__item--today {
     background-color: #00ff0010;
     border: 1px solid #00ff00;
@@ -92,7 +97,7 @@ body {
 .week__item {
     font-size: large;
     padding: 10px 5px;
-    background-color: #dddddd50;
+    background-color: var(--main-color);
     width: 100%;
 }
 
@@ -242,4 +247,16 @@ select {
     display: flex;
     gap: 15px;
     font-size: xx-large;
+}
+
+.calender--root {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 10px;
+}
+
+.calender__item--header--min h1{
+    font-size: medium;
 }
