@@ -74,8 +74,6 @@ let state = localStorage.state ? JSON.parse(localStorage.state) : {
     appointmentList: []
 }
 
-const selectedAppoinment = null
-
 const save = () => {
     localStorage.state = JSON.stringify(state)
     state = JSON.parse(localStorage.state) || {}
@@ -94,30 +92,26 @@ const previousMonth = () => {
 const previewModal = document.querySelector('#previewAppointmentDialog');
 
 const openPreviewModal = (appointment) => {
-    console.log(appointment);
     const root = document.createElement('div');
 
-    const header = document.createElement('h3');
-    header.innerHTML = `${appointment.first_name} ${appointment.last_name}`
-
-    const body = document.createElement('div');
-    let age = document.createElement('div')
-    age.innerHTML = appointment.age
-    let date = document.createElement('div')
-    date.innerHTML = appointment.date
-    let time = document.createElement('div')
-    time.innerHTML = appointment.time
-    let email = document.createElement('a')
-    email.href = `mailto:${appointment.email}`
-    email.innerHTML = appointment.email
-    let gender = document.createElement('div')
-    gender.innerHTML = appointment.gender
-    body.append(age, date, time, email, gender)
-
-    const footer = document.createElement('div');
-    footer.innerHTML = 'footer'
-    
-    root.append(header, body, footer);
+    root.innerHTML = `
+    <div class="appointments_card">
+        <div class="appointments_card__header" style="display: flex; flex-direction: column; gap: 10px;">
+            <h3>${appointment.first_name} ${appointment.last_name}</h3>
+            <div style="display: flex; gap: 15px;">
+                <div>Age: ${appointment.age}</div>
+                <div>Email: <a href="mainlto:${appointment.email}">${appointment.email}</a></div>
+            </div>
+        </div>
+        <div class="appointments_card__body">
+            <img width="100" src="https://cdn-icons-png.flaticon.com/512/470/470326.png" alt="">
+            <div>
+                <div>${appointment.date}</div>
+                <div>${appointment.time}</div>
+            </div>
+        </div>
+    </div>
+    `
 
     let previewConent = document.querySelector('#previewConent');
     previewConent.innerHTML = ''
@@ -152,17 +146,21 @@ const printMonth = (month, year) => {
     for (const day of dateInstence.getCurrentMonth(true)) {
         day.setUTCHours(0, 0, 0, 0)
         let isToday = day.getTime() == today.getTime()
-        let dayElement = document.createElement('button');
+        let dayElement = document.createElement('button')
 
         dayElement.classList.add('days__item')
-        if (day.getMonth() !== dateInstence.getMonth()) dayElement.setAttribute('disabled', '');
+        if (day.getMonth() !== dateInstence.getMonth()) dayElement.setAttribute('disabled', '')
         if (isToday) dayElement.classList.add('days__item--today')
         dayElement.innerHTML = day.getDate()
         dayElement.style.fontSize = 'xx-large'
-        days.append(dayElement);
+        days.append(dayElement)
 
-        let appointments = state.appointmentList.filter(appointment => new Date(appointment.date).getTime() == day.getTime())
-        let listElement = document.createElement('div');
+        let appointments = state.appointmentList.map(appointment => {
+            appointment.schedule = new Date(`${appointment.date} ${appointment.time}`);
+            return appointment;
+        } ).filter(appointment => new Date(appointment.date).getTime() == day.getTime())
+        .sort((a, b) =>  a.schedule - b.schedule)
+        let listElement = document.createElement('div')
         // list item
         listElement.classList.add('appointments')
         for (const appointment of appointments) {
