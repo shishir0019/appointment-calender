@@ -10,9 +10,97 @@
 </head>
 
 <body>
-    <div id="main">
+    <header>
+        <h1>Doctor Appointment Calendar</h1>
+        <button class="btn btn--green" onclick="openCreateDialog()">create appointment</button>
+    </header>
 
-    </div>
+    <main style="padding: 30px;">
+        <div class="calender">
+            <div class="calender__item calender__item--header">
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn btn--black" onclick="previousMonth()">&#60;</button>
+                    <button class="btn btn--black" onclick="nextMonth()">&#62;</button>
+                    <form style="margin: 0 10px;">
+                        <select class="from_control" name="view" id="">
+                            <option value="month">Monthly</option>
+                        </select>
+                    </form>
+                </div>
+                <h1 class="month"></h1>
+            </div>
+            <div class="calender__item">
+                <div class="week">
+                    <div class="week__item">Wednesday</div>
+                    <div class="week__item">Thursday</div>
+                    <div class="week__item">Friday</div>
+                    <div class="week__item">Satureday</div>
+                    <div class="week__item">Sanday</div>
+                    <div class="week__item">Monday</div>
+                    <div class="week__item">Tuesday</div>
+                </div>
+            </div>
+            <div class="calender__item calender__item--body">
+                <div class="days">
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- preview Dialog -->
+    <dialog id="previewAppointmentDialog" class="preview-dialog">
+        <button class="btn btn--close" type="button" onclick="closePreviewDialog()">&#x2716;</button>
+        <div id="previewConent"></div>
+    </dialog>
+
+    <!-- Create Dialog -->
+    <dialog id="createAppointmentDialog">
+        <form method="dialog" class="form">
+            <h3>Create an appointment</h3>
+            <div class="form__input">
+                <label for="first_name">First name</label>
+                <input type="text" name="first_name" placeholder="First name" maxlength="40" required>
+            </div>
+            <div class="form__input">
+                <label for="last_name">Last ame</label>
+                <input type="text" name="last_name" placeholder="Last name" maxlength="40" required>
+            </div>
+            <div class="form__input">
+                <label for="email">Email</label>
+                <input type="email" name="email" placeholder="example@demo.com" required>
+            </div>
+            <div style="display: flex; gap: 15px;">
+                <div class="form__input">
+                    <label for="age">Age</label>
+                    <input type="number" name="age" placeholder="Age">
+                </div>
+                <div class="form__input">
+                    <label for="gender">Gender</label>
+                    <div style="padding: 5px 0;">
+                        <input type="radio" name="gender" value="male"> Male
+                        <input type="radio" name="gender" value="female"> Female
+                        <input type="radio" name="gender" value="others"> Others
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; gap: 15px;">
+                <div class="form__input">
+                    <label for="date">Date</label>
+                    <input type="date" name="date" required>
+                </div>
+                <div class="form__input">
+                    <label for="tile">Time</label>
+                    <input type="time" name="time" required>
+                </div>
+            </div>
+            <hr>
+            <div class="form__input" style="display: flex; flex-direction: row;">
+                <button class="btn btn--red" type="button" onclick="closeCreateDialog()">Close</button>
+                <input type="submit" class="btn btn--green" value="Create"></button>
+            </div>
+        </form>
+    </dialog>
 
     <script src="../main.js"></script>
 </body>
