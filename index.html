@@ -18,9 +18,9 @@
     <main style="padding: 30px;">
         <div class="calender">
             <div class="calender__item calender__item--header">
-                <div style="display: flex;">
-                    <button class="btn btn--green" onclick="previousMonth()">&#60;</button>
-                    <button class="btn btn--green" onclick="nextMonth()">&#62;</button>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn btn--black" onclick="previousMonth()">&#60;</button>
+                    <button class="btn btn--black" onclick="nextMonth()">&#62;</button>
                     <form style="margin: 0 10px;">
                         <select class="from_control" name="view" id="">
                             <option value="month">Monthly</option>
@@ -52,7 +52,6 @@
     <dialog id="previewAppointmentDialog" class="preview-dialog">
         <button class="btn btn--close" type="button" onclick="closePreviewDialog()">&#x2716;</button>
         <div id="previewConent"></div>
-        <div style="font-size: 100px;">📅</div>
     </dialog>
 
     <!-- Create Dialog -->
@@ -61,11 +60,11 @@
             <h3>Create an appointment</h3>
             <div class="form__input">
                 <label for="first_name">First name</label>
-                <input type="text" name="first_name" placeholder="First name" max="40" required>
+                <input type="text" name="first_name" placeholder="First name" maxlength="40" required>
             </div>
             <div class="form__input">
                 <label for="last_name">Last ame</label>
-                <input type="text" name="last_name" placeholder="Last name" max="40" required>
+                <input type="text" name="last_name" placeholder="Last name" maxlength="40" required>
             </div>
             <div class="form__input">
                 <label for="email">Email</label>
